@@ -12,19 +12,19 @@ async function IniciarSesion(){
  
   InicioUsuario.contrasena = document.getElementById("txtContraseña").value;
   
-  let repContraseña = document.getElementById("txtRepeatContra").value;
-
-  if (repContraseña != datosUsuario.contrasena){
-      alert("la contraseña ingresada no son iguales")
-  }
-
     const Request = await fetch('api/Login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },  
-      body: JSON.stringify(datosUsuario)    
+      body: JSON.stringify(InicioUsuario)    
     });
-    const Respuesta = await Request.json();  
+    const Respuesta = await Request.text();  
+    if (Respuesta == "OK"){
+      window.location.href = "usuarios.html"
+    }
+    else{
+      alert ("las credenciales ingresadas no son correctas");
+    }
 }
